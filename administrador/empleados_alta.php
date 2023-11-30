@@ -9,7 +9,6 @@ include("menu.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta empleados</title>
-    <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./js/registro_usuario.js"></script>
 </head>
 

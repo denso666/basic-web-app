@@ -1,16 +1,16 @@
-function agregar_producto(id_pedido, id_producto, costo, cantidad) {
-    if (cantidad > 0) return false;
+function agregar_producto() {
+    let id_producto = document.getElementById('id_producto').value;
+    let cantidad = document.getElementById('cantidad').value;
+
+    if (cantidad < 0) return false;
     else {
         $.ajax({
-            url: '../administrador/funciones/pedidos/agregar_producto_pedido.php',
+            url: '../administrador/funciones/clientes/agregar_producto_pedido.php',
             type: 'post',
             dataType: 'text',
-            data: { id_pedido, id_producto, costo, cantidad },
-            success: function (res) {
-                if (res == 0) {
-                    $("#producto_error").fadeIn();
-                    setTimeout(() => { $("#producto_error").fadeOut(1500); }, 5000);
-                }
+            data: { id_producto, cantidad },
+            success: _ => {
+                alert('Producto agregado!');
             }, error: function () {
                 alert('Error archivo no encontrado...')
             }
