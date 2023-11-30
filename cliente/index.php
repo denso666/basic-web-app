@@ -1,9 +1,9 @@
 <?php
 include "./header.php";
 
-$sql = "SELECT * FROM banners WHERE status = 1 AND eliminado = 0 ORDER BY RAND() LIMIT 1";
+$sql = "SELECT * FROM promociones WHERE status = 1 AND eliminado = 0 ORDER BY RAND() LIMIT 1";
 $res = $con->query($sql);
-$banner = $res->fetch_array();
+$promocion = $res->fetch_array();
 
 $sql = "SELECT * FROM productos WHERE status = 1 AND eliminado = 0 ORDER BY RAND() LIMIT 3";
 $productos = $con->query($sql);
@@ -15,27 +15,38 @@ $productos = $con->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bienvenido</title>
+    <script src="./js/agregar_producto_pedido.js"></script>
 </head>
 
-<body>
-    <!-- BANNER -->
-    <div>
-        <img src="../administrador/imagenes/<?php echo $banner['archivo'] ?>" class="card-img">
-    </div>
-    <!-- PRODUCTO -->
-    <?php while ($row = $productos->fetch_array()) { ?>
-        <div class="card mb-3">
-            <li class="list-group-item" style="max-width: 15rem;">
-                <img src="../administrador/imagenes/<?php echo $row['archivo'] ?>" class="card-img">
-            </li>
-            <div class="card-body">
-                <h5 class="card-title">productos</h5>
-            </div>
+<body class="mb-3">
+    <div class="container">
+        <!-- BANNER -->
+        <div class="row text-center promocion mt-3">
+            <img src="../administrador/imagenes/<?php echo $promocion['archivo'] ?>">
         </div>
-    <?php } ?>
-</body>
+        <!-- PRODUCTO -->
+        <div class="row my-1 text-center">
+            <?php while ($row = $productos->fetch_array()) { ?>
+                <div class="col md-3">
+                    <input value=<?php echo $row['id']; ?> id="id_producto" hidden/>
+                    <div class="card">
+                        <img src="../administrador/imagenes/<?php echo $row['archivo'] ?>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row['nombre'] ?></h5>
+                            <p class="card-text"><?php echo $row['descripcion'] ?></p>
+                            <a href="./producto_detalle.php?id=<?php echo $row['id'] ?>" class="btn btn-primary mb-1">Ver</a>
+                            <div class="input-group">
+                                <button class="btn btn-outline-warning" onclick="agregar_producto()">Añadir</button>
+                                <input type="number" id="cantidad" class="form-control" min="1" max="<?php echo $row['stock']; ?>" value=1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 
-</html>
+</body>
 
 <?php include "./footer.php"; ?>

@@ -1,12 +1,8 @@
-<?php
-// verificar si hay un pedido abierto
-if (!isset( $_SESSION["id_pedido"] )) {
-    require "../administrador/funciones/conecta.php";
-    $con = conecta();
-    $res = $con->query("INSERT INTO pedidos (id, total, cerrado) VALUES (0, 0, 0)");
-    $_SESSION["id_pedido"] = $con->insert_id;
-}
+<?php 
+require "../administrador/funciones/conecta.php";
+$con = conecta();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +11,8 @@ if (!isset( $_SESSION["id_pedido"] )) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>

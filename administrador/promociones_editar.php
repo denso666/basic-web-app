@@ -15,8 +15,7 @@ $row = mysqli_fetch_assoc($res);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar banner</title>
-    <script src="./js/jquery-3.3.1.min.js"></script>
+    <title>Editar promoción</title>
     <script src="./js/promociones_editar.js"></script>
 </head>
 

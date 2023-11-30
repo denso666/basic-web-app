@@ -14,43 +14,37 @@ $res = $con->query($sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla pedidos</title>
-    <script src="./js/jquery-3.3.1.min.js"></script>
-    
+    <title>Tabla pedidos</title>    
 </head>
 
-<body><br><br>
-    <table class="table table-hover table-sm">
-        <thead class="table-secondary">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Detalle</th>
-                <th scope="col">Total</th>
-            </tr>
-        </thead>
-        <tbody class="table table-hover">
-            <?php while ($row = $res->fetch_array()) { ?>
-                <tr class="table-primary  table-hover " id="<?php echo $row['id'] ?>">
-                    <td>
-                        <?php echo $row["id"] ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-outline-success" href="./pedidos_ver.php?id=<?php echo $row['id'] ?>"> Ver
-                            detalle</a>
-                    </td>
-                    <td>
-                        <?php echo $row["total"] ?>
-                    </td>
-                    
-                    
+<body>
+    <div class="container text-center">
+        <table class="table table-hover table-sm mt-4">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Total</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <a class="btn btn-outline-warning" href="./bienvenido.php">Regresar al menu de inicio</a>
+            </thead>
+            <tbody class="table table-hover">
+                <?php while ($row = $res->fetch_array()) { ?>
+                    <tr class="table-primary  table-hover " id="<?php echo $row['id'] ?>">
+                        <td> <?php echo $row["id"] ?> </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="./pedidos_ver.php?id=<?php echo $row['id'] ?>">
+                                Ver detalle
+                            </a>
+                        </td>
+                        <td> <?php echo $row["total"] ?> </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a class="btn btn-outline-warning" href="./bienvenido.php">Regresar al menu de inicio</a>
+        </div>
     </div>
-
 </body>
 
 </html>

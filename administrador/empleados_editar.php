@@ -18,7 +18,6 @@ $row = mysqli_fetch_assoc($res);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar empleados</title>
     <script src="./js/editar_usuario.js"></script>
-    <script src="./js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>

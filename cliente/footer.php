@@ -1,5 +1,4 @@
-
-<div class="d-flex align-items-end" style="position:absolute;bottom:0;width:100%;height:2.5rem; ">
+<div class="d-flex align-items-end">
     <div class="container">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">

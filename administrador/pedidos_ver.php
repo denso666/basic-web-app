@@ -4,18 +4,10 @@ require "./funciones/conecta.php";
 
 $con = conecta();
 $id = $_REQUEST['id'];
-//sirve para ver los pedidos 
-//sp es un subnombre
-$sql = `
-    SELECT pe.id, pe.total, pe.cerrado, pp.id_producto, pp.costo, pp.cantidad 
-    FROM pedidos AS pe
-    LEFT JOIN pedido_producto AS pp
-    ON pe.id = $id AND pe.id = pp.id_pedido
-`;
-$sql = "SELECT * FROM pedidos WHERE id =$id";
+$sql = "SELECT pr.id, pr.nombre, pp.costo, pp.cantidad FROM productos as pr INNER JOIN pedido_producto AS pp ON pp.id_pedido = $id AND pr.id = pp.id_producto;";
 
 $res = $con->query($sql);
-$row = mysqli_fetch_assoc($res);
+$total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -28,26 +20,43 @@ $row = mysqli_fetch_assoc($res);
 </head>
 
 <body>
-    <div class="row justify-content-center mt-4">
-        <table class="table table-hover table-sm mx-4">
-            <thead class="table-secondary">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">P/U</th>
-                    <th scope="col">QTY</th>
-                </tr>
-            </thead>
-            <tbody class="table table-hover">
-                <?php while ($row = $res->fetch_array()) { ?>
-                    <tr class="table-primary  table-hover">
-                        <td> <?php echo $row["id_producto"] ?>   </td>
-                        <td> <?php echo $row["costo"] ?>         </td>
-                        <td> <?php echo $row["cantidad"] ?>      </td>
+    <div class="container">
+        <div class="row justify-content-center mt-4 text-center">
+            <table class="table table-hover table-sm mx-4">
+                <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">P/U</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Sub Total</th>
+                        <th scope="col">Total</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <a class="btn btn-outline-warning" href="./pedidos_lista.php">Regresar a Listado de pedidos</a><br>
+                </thead>
+                <tbody class="table table-hover">
+                    <?php while ($row = $res->fetch_array()) { ?>
+                        <tr class="table-primary  table-hover">
+                            <td> <?php echo $row["id"] ?>       </td>
+                            <td> <?php echo $row["nombre"] ?>   </td>
+                            <td> $<?php echo $row["costo"] ?>   </td>
+                            <td> <?php echo $row["cantidad"] ?> </td>
+                            <td> $<?php echo ($row["costo"] * $row["cantidad"]); ?> </td>
+                        </tr>
+                        <?php $total += ($row["costo"] * $row["cantidad"]); ?>
+                    <?php } ?>
+
+                    <tr class="table-primary  table-hover">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> $<?php echo $total ?> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-outline-warning" href="./pedidos_lista.php">Regresar a Listado de pedidos</a><br>
+        </div>
     </div>
 </body>
 
